@@ -20,18 +20,23 @@ Phase 2: Connect to EC2 and Install Server Dependencies
 Open your local terminal (PowerShell, Command Prompt, or Mac/Linux Terminal), navigate to where your .pem key is stored, and log in.
 
 1. Connect to your EC2 instance
+
 ssh -i <your-key.pem> ec2-user@<your-ec2-public-ip>
 
-2. Update the system packages
+3. Update the system packages
+
 sudo dnf update -y
 
-3. Add the Node.js repository (Using LTS version 20)
+5. Add the Node.js repository (Using LTS version 20)
+
 curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
 
-4. Install Node.js and Git
+7. Install Node.js and Git
+
 sudo dnf install -y nodejs git
 
-5. Verify the installations
+9. Verify the installations
+   
 node -v
 npm -v
 git --version
@@ -40,11 +45,11 @@ git --version
 Phase 3: Clone Your Repository
 Download your application code from GitHub onto the EC2 instance.
 
-
 1. Clone your project
+
 git clone <your-github-repo-url>
 
-2. Move into your project directory
+3. Move into your project directory
 cd <your-project-folder>
 
 
