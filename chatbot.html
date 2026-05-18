@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Offline Customer Support Chatbot</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #e6f2ff;
+        }
+
+        .chat-container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        #chatbox {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user {
+            color: blue;
+        }
+
+        .bot {
+            color: green;
+        }
+
+        input {
+            width: 75%;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-container">
+        <h3>Customer Support Chatbot</h3>
+        <div id="chatbox"></div>
+
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function getResponse(input) {
+            input = input.toLowerCase();
+
+            // Greeting
+            if (input.includes("hello") || input.includes("hi"))
+                return "Hello! Welcome to customer support. How can I help you?";
+
+            // Order related
+            if (input.includes("order") || input.includes("track"))
+                return "You can track your order using your Order ID in 'My Orders' section.";
+
+            // Payment
+            if (input.includes("payment") || input.includes("pay"))
+                return "We support UPI, debit/credit cards, and net banking.";
+
+            // Refund
+            if (input.includes("refund") || input.includes("return"))
+                return "Refunds are processed within 5-7 working days after approval.";
+
+            // Complaint
+            if (input.includes("problem") || input.includes("issue"))
+                return "Please describe your issue. Our team will assist you.";
+
+            // Contact
+            if (input.includes("contact"))
+                return "You can contact us at support@example.com.";
+
+            // Exit
+            if (input.includes("bye"))
+                return "Thank you for chatting. Have a nice day!";
+
+            return "Sorry, I didn't understand. Please try again.";
+        }
+
+        function sendMessage() {
+            let inputField = document.getElementById("userInput");
+            let chatbox = document.getElementById("chatbox");
+
+            let userText = inputField.value.trim();
+            if (userText === "") return;
+
+            chatbox.innerHTML += `<p class="user"><b>You:</b> ${userText}</p>`;
+
+            let botReply = getResponse(userText);
+            chatbox.innerHTML += `<p class="bot"><b>Bot:</b> ${botReply}</p>`;
+
+            inputField.value = "";
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Enter key support
+        document.getElementById("userInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") sendMessage();
+        }); 
+    </script>
+
+</body>
+
+</html>
